@@ -13,3 +13,5 @@ freebuff-sites-build/
 /.wrangler/
 __pycache__/
 *.pyc
+*.tsbuildinfo
+dev.log

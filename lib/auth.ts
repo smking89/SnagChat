@@ -14,7 +14,9 @@ import { getEnv } from './db'
 export const SESSION_COOKIE = 'snag_session'
 export const SESSION_TTL_MS = 30 * 24 * 60 * 60 * 1000
 export const RESET_TTL_MS = 60 * 60 * 1000
-const PBKDF2_ITERATIONS = 210_000
+// Workers rejects PBKDF2 above 100,000 iterations, so this is the strongest
+// setting that runs both locally and on the deployed worker.
+const PBKDF2_ITERATIONS = 100_000
 
 export type AuthTokenKind = 'reset_password'
 
@@ -81,12 +83,19 @@ export async function verifyPassword(password: string, stored: string | null): P
   const iterations = Number(iterationText)
   if (!Number.isFinite(iterations) || iterations < 1000) return false
 
-  const key = await crypto.subtle.importKey('raw', encoder.encode(password), 'PBKDF2', false, ['deriveBits'])
-  const bits = await crypto.subtle.deriveBits(
-    { name: 'PBKDF2', salt: fromBase64Url(saltText), iterations, hash: 'SHA-256' },
-    key,
-    256
-  )
+  let bits: ArrayBuffer
+  try {
+    const key = await crypto.subtle.importKey('raw', encoder.encode(password), 'PBKDF2', false, ['deriveBits'])
+    bits = await crypto.subtle.deriveBits(
+      { name: 'PBKDF2', salt: fromBase64Url(saltText), iterations, hash: 'SHA-256' },
+      key,
+      256
+    )
+  } catch {
+    // A stored hash with more iterations than the runtime allows can never
+    // verify here; treat it as a failed password rather than a 500.
+    return false
+  }
   const expected = fromBase64Url(hashText)
   const actual = new Uint8Array(bits)
   if (expected.length !== actual.length) return false
