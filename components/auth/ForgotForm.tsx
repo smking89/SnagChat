@@ -118,7 +118,7 @@ export function ForgotForm() {
           <button
             type="submit"
             disabled={busy || !value.trim()}
-            className="w-full rounded-xl bg-ink px-4 py-3 text-[15px] font-bold text-white transition disabled:opacity-50"
+            className="w-full rounded-xl bg-white px-4 py-3 text-[15px] font-bold text-ink transition hover:bg-white/90 disabled:opacity-60"
           >
             {busy ? 'Sending…' : mode === 'password' ? 'Send reset link' : 'Email me my address'}
           </button>

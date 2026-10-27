@@ -80,7 +80,7 @@ export function SignInForm() {
       <button
         type="submit"
         disabled={busy || !email.trim() || !password}
-        className="w-full rounded-xl bg-snag px-4 py-3 text-[15px] font-bold text-white transition hover:brightness-95 disabled:opacity-50"
+        className="w-full rounded-xl bg-white px-4 py-3 text-[15px] font-bold text-ink transition hover:bg-white/90 disabled:opacity-60"
       >
         {busy ? 'Signing in…' : 'Sign in'}
       </button>

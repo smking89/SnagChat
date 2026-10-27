@@ -30,7 +30,7 @@ export default async function SignInPage() {
 
       <div className="mt-4 border-t border-hair pt-4">
         <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Or look around first</p>
-        <DemoButton />
+        <DemoButton tone="onBrand" />
         <p className="mt-3 text-center text-[11px] text-muted">
           <Link href="/auth/forgot" className="underline underline-offset-2 hover:text-ink">
             Forgot your password or email?

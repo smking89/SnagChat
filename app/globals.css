@@ -25,6 +25,68 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/*
+ * Auth screens: full-bleed brand purple with no outer frame. The logo lockup is
+ * centred, primary actions are white with ink text, and the only chroma on the
+ * page is the surface itself.
+ */
+.auth-surface {
+  width: 100%;
+  min-height: 100dvh;
+  background: var(--color-snag);
+}
+
+.auth-surface .shell {
+  height: auto;
+  min-height: 100dvh;
+  overflow: visible;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.auth-surface h1 {
+  color: #ffffff;
+}
+
+.auth-surface p {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.auth-surface .text-muted {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.auth-surface a {
+  color: #ffffff;
+}
+
+/* Errors need to stay legible on purple without shouting. */
+.auth-surface .text-snap-pink {
+  color: #ffd9e6;
+}
+
+.auth-surface .border-hair {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* Fields keep their white fill so black text stays readable. */
+.auth-surface input {
+  background: #ffffff;
+}
+
+.auth-surface input.border-hair {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 640px) {
+  body:has(.auth-surface) {
+    display: block;
+    background: var(--color-snag);
+  }
+}
+
 /* Phone-first shell: full screen on mobile, framed on desktop. */
 .shell {
   width: 100%;

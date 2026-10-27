@@ -99,7 +99,7 @@ export function RegisterForm() {
       <button
         type="submit"
         disabled={busy || !displayName.trim() || !email.trim() || password.length < MIN_PASSWORD}
-        className="w-full rounded-xl bg-snag px-4 py-3 text-[15px] font-bold text-white transition hover:brightness-95 disabled:opacity-50"
+        className="w-full rounded-xl bg-white px-4 py-3 text-[15px] font-bold text-ink transition hover:bg-white/90 disabled:opacity-60"
       >
         {busy ? 'Creating your account…' : 'Create account'}
       </button>
