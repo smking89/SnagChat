@@ -1,0 +1,15 @@
+node_modules/
+.next/
+freebuff-sites-build/
+.open-next/
+.wrangler/
+.env
+.env.local
+.env*.local
+*.log
+.DS_Store
+/freebuff-sites-build/
+/.open-next/
+/.wrangler/
+__pycache__/
+*.pyc
